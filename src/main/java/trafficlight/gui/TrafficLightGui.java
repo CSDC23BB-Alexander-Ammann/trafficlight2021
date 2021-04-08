@@ -31,7 +31,7 @@ public class TrafficLightGui extends JFrame implements ActionListener {
     private int yellowIntervall = 500;
 
     private int intervall = 1500;
-
+    private int count = 0;
     public TrafficLightGui(TrafficLightCtrl ctrl){
         super(NAME_OF_THE_GAME);
         trafficLightCtrl = ctrl;
@@ -83,6 +83,19 @@ public class TrafficLightGui extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(dialog, e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            while (count <10 && trafficLightCtrl.getCurrentState().equals(trafficLightCtrl.getYellowState())){
+                try {
+                    if (yellow.isOn) {
+                        yellow.turnOn(false);
+
+                    } else {
+                        yellow.turnOn(true);
+                    }
+                    Thread.sleep(500);
+                } catch (InterruptedException e){
+            }
+                count++;
+            }
              while (isAutoMode) {
                  //TODO call the controller
                  trafficLightCtrl.nextState();
@@ -124,6 +137,7 @@ public class TrafficLightGui extends JFrame implements ActionListener {
             red.turnOn(false);
             yellow.turnOn(true);
             green.turnOn(false);
+            count = 0;
         }
         if (trafficLightColor == trafficLightColor.GREEN) {
             red.turnOn(false);

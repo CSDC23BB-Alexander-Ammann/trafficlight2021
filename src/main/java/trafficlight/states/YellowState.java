@@ -5,13 +5,9 @@ import trafficlight.states.State;
 
 
 public class YellowState implements State {
-    private final TrafficLightCtrl ctrl;
-    public YellowState(TrafficLightCtrl ctrl) {
-        this.ctrl = ctrl;
-    }
 
     @Override
-    public void nextState() {
+    public void nextState(TrafficLightCtrl ctrl) {
 
         if (ctrl.getPreviousState().equals(ctrl.getRedState())) {
             ctrl.setCurrentState(ctrl.getGreenState());

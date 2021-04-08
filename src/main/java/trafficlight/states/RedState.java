@@ -11,6 +11,7 @@ public class RedState implements State {
     }
     @Override
     public void nextState() {
+        ctrl.setPreviousState(this);
         ctrl.setCurrentState(ctrl.getYellowState());
     }
 
